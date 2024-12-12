@@ -45,12 +45,17 @@ func GetExampleHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func StartHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Perfect")
+}
+
 func main() {
 	// Create a new router
 	router := mux.NewRouter()
 
 	// Define the API route
 	router.HandleFunc("/add/{input1}/{input2}", GetExampleHandler).Methods("GET")
+	router.HandleFunc("/", StartHandler).Methods("GET")
 
 	// Start the server
 	fmt.Println("Server is running on port 8080...")
