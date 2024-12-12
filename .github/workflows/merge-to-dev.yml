@@ -39,7 +39,7 @@ jobs:
       run: docker build -t githubaction .
 
     - name: Tag
-      run: docker tag githubaction ${{ secrets.DOCKER_USERNAME }}/${{ env.BRANCH_NAME }}:latest
+      run: docker tag githubaction ${{ secrets.DOCKER_USERNAME }}/${{ env.BRANCH_NAME }}:v1
 
     - name: Push
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.BRANCH_NAME }}:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.BRANCH_NAME }}:v1
