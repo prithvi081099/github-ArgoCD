@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: githubaction
-        image: pmalhotra08/dev:latest
+        image: pmalhotra08/dev:v1
         ports:
         - containerPort: 8080
