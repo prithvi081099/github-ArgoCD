@@ -3,12 +3,17 @@ kind: Application
 metadata:
   name: githubaction-app
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/prithvi081099/github-ArgoCD.git
     targetRevision: dev
-    path: .
+    path: gitOpsArgoCD
+    helm:
+      containerName: dev
+      containerVersion: v1
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
