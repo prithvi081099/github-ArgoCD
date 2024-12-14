@@ -1,0 +1,63 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: githubaction-app
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/prithvi081099/github-ArgoCD.git
+#     targetRevision: dev
+#     path: gitOpsArgoCD
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: dev
+
+#   syncPolicy:
+#     syncOptions:
+#     - CreateNamespace=true
+
+#     automated:
+#       selfHeal: true
+#       prune: true 
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: githubaction-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - pullRequest:
+      github:
+        # The GitHub organization or user.
+        owner: prithvi081099
+        # The Github repository
+        repo: github-ArgoCD
+      requeueAfterSeconds: 120
+  template:
+    metadata:
+      name: githubaction-app
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/prithvi081099/github-ArgoCD.git
+        targetRevision: dev
+        path: gitOpsArgoCD
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: dev
+
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+
+        automated:
+          selfHeal: true
+          prune: true 
