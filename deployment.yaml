@@ -16,4 +16,4 @@ spec:
       - name: githubaction
         image: pmalhotra08/dev:v1
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
